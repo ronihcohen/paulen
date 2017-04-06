@@ -1,62 +1,76 @@
 import React from 'react';
 import StarRatingComponent from 'react-star-rating-component';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
+import TextField from 'material-ui/TextField';
 
 
-function compare(a,b) {
-  if (a.score > b.score)
-    return -1;
-  if (a.score < b.score)
-    return 1;
-  return 0;
+function compare(a, b) {
+    a.paulenScore = a.paulenScore || 0;
+    b.paulenScore = b.paulenScore || 0;
+    if (a.paulenScore > b.paulenScore)
+        return -1;
+    if (a.paulenScore < b.paulenScore)
+        return 1;
+    return 0;
 }
 
 
-const Restaurants = ({restaurants, onStarClick})  => {
-  const fiteredRestaurants = restaurants.sort(compare);
-  const handleStarClick = function (nextValue, prevValue, id) {
-      onStarClick({
-          id: id,
-          score: nextValue
-      });
-  };
+const Restaurants = ({restaurants, searchVal, onStarClick, onSearch}) => {
 
-  return (
-      <Table selectable={false}>
-          <TableHeader displaySelectAll={false}
-                       adjustForCheckbox={false}>
-              <TableRow>
-                  <TableHeaderColumn>Name</TableHeaderColumn>
-                  <TableHeaderColumn>Paulen Score</TableHeaderColumn>
-                  <TableHeaderColumn>Critics Score</TableHeaderColumn>
-                  <TableHeaderColumn className="optionalColumn">Details</TableHeaderColumn>
-                  <TableHeaderColumn className="optionalColumn">Type</TableHeaderColumn>
-              </TableRow>
-          </TableHeader>
-          <TableBody displayRowCheckbox={false}>
-              {fiteredRestaurants.map((restaurant) => (
-                  <TableRow key={restaurant.id}>
-                      <TableRowColumn>{restaurant.name}</TableRowColumn>
-                      <TableRowColumn>
-                          <StarRatingComponent
-                              name={"" + restaurant.id}
-                              starCount={5}
-                              value={restaurant.paulenScore}
-                              onStarClick={handleStarClick}
-                          />
-                      </TableRowColumn>
-                      <TableRowColumn>{restaurant.score}</TableRowColumn>
-                      <TableRowColumn className="optionalColumn">
-                        {restaurant.address}
-                        <br/>
-                        {restaurant.tel}
-                      </TableRowColumn>
-                      <TableRowColumn className="optionalColumn"> {restaurant.type}</TableRowColumn>
-                  </TableRow>
-              ))}
-          </TableBody>
-      </Table>
-  );
+    const fiteredRestaurants = restaurants.filter(restaurant => {
+        if (!searchVal || restaurant.name.includes(searchVal)) {
+            return restaurant;
+        }
+    }).sort(compare);
+
+    const handleStarClick = function (nextValue, prevValue, id) {
+        onStarClick({
+            id: id,
+            score: nextValue
+        });
+    };
+
+    return (
+        <div>
+            <TextField
+                hintText="Search"
+                fullWidth={true}
+                onChange={onSearch}
+            />
+            <Table selectable={false}>
+                <TableHeader displaySelectAll={false}
+                             adjustForCheckbox={false}>
+                    <TableRow>
+                        <TableHeaderColumn>Name</TableHeaderColumn>
+                        <TableHeaderColumn>Paulen Score</TableHeaderColumn>
+                        <TableHeaderColumn className="optionalColumn">Critics Score</TableHeaderColumn>
+                        <TableHeaderColumn className="optionalColumn">Details</TableHeaderColumn>
+                    </TableRow>
+                </TableHeader>
+                <TableBody displayRowCheckbox={false}>
+                    {fiteredRestaurants.map((restaurant) => (
+                        <TableRow key={restaurant.id}>
+                            <TableRowColumn>{restaurant.name}</TableRowColumn>
+                            <TableRowColumn>
+                                <StarRatingComponent
+                                    name={"" + restaurant.id}
+                                    starCount={5}
+                                    value={restaurant.paulenScore}
+                                    onStarClick={handleStarClick}
+                                />
+                            </TableRowColumn>
+                            <TableRowColumn className="optionalColumn">{restaurant.score}</TableRowColumn>
+                            <TableRowColumn className="optionalColumn">
+                                {restaurant.address}
+                                <br/>
+                                {restaurant.tel}
+                            </TableRowColumn>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </div>
+    );
 };
 
 

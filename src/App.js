@@ -1,17 +1,21 @@
 import {connect} from 'react-redux'
 import Restaurants from './Restaurants'
-import { onStarClick } from './actions'
+import { onStarClick, onSearch } from './actions'
 
 const mapStateToProps = (state) => {
     return {
-        restaurants: state.restaurants
+        restaurants: state.restaurants.data,
+        searchVal: state.restaurants.searchVal
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onStarClick: (room) => {
-            dispatch(onStarClick(room))
+        onStarClick: (restaurant) => {
+            dispatch(onStarClick(restaurant))
+        },
+        onSearch: (event, searchVal) => {
+            dispatch(onSearch(searchVal))
         }
     }
 };

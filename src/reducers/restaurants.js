@@ -1,12 +1,15 @@
 
 
-const restaurants = (state = [], action) => {
+const restaurants = (state = {data: []}, action) => {
     switch (action.type) {
         case 'RECEIVE_RESTAURANTS':
-            return action.restaurants;
-        case 'STAR_CLICK':
-            console.log(action);
-            return state;
+            return Object.assign({}, state, {
+                data: action.restaurants
+            });
+        case 'FILTER_RESTAURANTS':
+            return Object.assign({}, state, {
+                searchVal: action.searchVal
+            });
         default:
             return state
     }
