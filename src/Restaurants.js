@@ -29,8 +29,8 @@ const Restaurants = ({restaurants, onStarClick})  => {
                   <TableHeaderColumn>Name</TableHeaderColumn>
                   <TableHeaderColumn>Paulen Score</TableHeaderColumn>
                   <TableHeaderColumn>Critics Score</TableHeaderColumn>
-                  <TableHeaderColumn>Details</TableHeaderColumn>
-                  <TableHeaderColumn>Type</TableHeaderColumn>
+                  <TableHeaderColumn className="optionalColumn">Details</TableHeaderColumn>
+                  <TableHeaderColumn className="optionalColumn">Type</TableHeaderColumn>
               </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
@@ -46,12 +46,12 @@ const Restaurants = ({restaurants, onStarClick})  => {
                           />
                       </TableRowColumn>
                       <TableRowColumn>{restaurant.score}</TableRowColumn>
-                      <TableRowColumn>
+                      <TableRowColumn className="optionalColumn">
                         {restaurant.address}
                         <br/>
                         {restaurant.tel}
                       </TableRowColumn>
-                      <TableRowColumn>{restaurant.type}</TableRowColumn>
+                      <TableRowColumn className="optionalColumn"> {restaurant.type}</TableRowColumn>
                   </TableRow>
               ))}
           </TableBody>
