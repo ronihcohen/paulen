@@ -18,9 +18,7 @@ function compare(a, b) {
 const Restaurants = ({restaurants, searchVal, onStarClick, onSearch}) => {
 
     const fiteredRestaurants = restaurants.filter(restaurant => {
-        if (!searchVal || restaurant.name.includes(searchVal)) {
-            return restaurant;
-        }
+        return !searchVal || restaurant.name.includes(searchVal);
     }).sort(compare);
 
     const handleStarClick = function (nextValue, prevValue, id) {
