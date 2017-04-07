@@ -19,6 +19,8 @@ const Restaurants = ({restaurants, searchVal, user, onStarClick, onSearch}) => {
         });
     };
 
+    let count = 1;
+
     return (
         <div>
             <TextField
@@ -30,8 +32,8 @@ const Restaurants = ({restaurants, searchVal, user, onStarClick, onSearch}) => {
                 <tbody>
                     {fiteredRestaurants.map((restaurant) => (
                         <tr key={restaurant.id}>
-                            <td>{restaurant.name}</td>
-                            <td>
+                            <td>{count++}. {restaurant.name}</td>
+                            <td className="stars">
                                 <StarRatingComponent
                                     name={"" + restaurant.id}
                                     value={restaurant.paulenScore}
@@ -43,7 +45,7 @@ const Restaurants = ({restaurants, searchVal, user, onStarClick, onSearch}) => {
                                 <br/>
                                 {restaurant.tel}
                             </td>
-                            <td>
+                            <td className="optionalColumn">
                                 {restaurant.score}
                             </td>
                         </tr>
