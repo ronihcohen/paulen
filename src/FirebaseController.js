@@ -2,7 +2,7 @@ import Firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
 
-import {receiveRestaurants} from './actions'
+import {receiveRestaurants, userLoggedIn} from './actions'
 
 
 const config = {
@@ -14,26 +14,25 @@ const config = {
 
 Firebase.initializeApp(config);
 
-Firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-        console.log('You are logged in as: ', user.displayName);
-    } else {
-        const provider = new Firebase.auth.FacebookAuthProvider();
-        Firebase.auth().signInWithPopup(provider).then(function(result) {
-            var user = result.user;
-            console.log('You are logged in as: ', user.displayName);
-        }).catch(function(error) {
-            var errorMessage = error.message;
-            console.log('Auth error: ',errorMessage);
-        });
-    }
-});
-
-
-
 export const initFirebase = function (store) {
     Firebase.database().ref('/').once('value').then(function (snapshot) {
         store.dispatch(receiveRestaurants(snapshot.val()))
+    });
+
+    Firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            store.dispatch(userLoggedIn(user.displayName));
+        } else {
+            const provider = new Firebase.auth.FacebookAuthProvider();
+            Firebase.auth().signInWithRedirect(provider);
+            Firebase.auth().getRedirectResult().then(function(result) {
+                var user = result.user;
+                store.dispatch(userLoggedIn(user.displayName));
+            }).catch(function(error) {
+                var errorMessage = error.message;
+                store.dispatch(userLoggedIn(errorMessage));
+            });
+        }
     });
 };
 

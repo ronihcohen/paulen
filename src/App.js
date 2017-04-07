@@ -5,7 +5,8 @@ import { onStarClick, onSearch } from './actions'
 const mapStateToProps = (state) => {
     return {
         restaurants: state.restaurants.data,
-        searchVal: state.restaurants.searchVal
+        searchVal: state.restaurants.searchVal,
+        user: state.restaurants.user
     }
 };
 

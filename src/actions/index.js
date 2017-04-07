@@ -31,3 +31,10 @@ export const onSearch = (searchVal) => {
     };
 };
 
+export const userLoggedIn = (user) => {
+    return {
+        type: 'USER_LOGGED_IN',
+        user: user
+    };
+};
+

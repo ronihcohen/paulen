@@ -2,7 +2,7 @@ import React from 'react';
 import StarRatingComponent from 'react-star-rating-component';
 import TextField from 'material-ui/TextField';
 
-const Restaurants = ({restaurants, searchVal, onStarClick, onSearch}) => {
+const Restaurants = ({restaurants, searchVal, user, onStarClick, onSearch}) => {
 
     const fiteredRestaurants = restaurants.filter(restaurant => {
         return !searchVal || restaurant.name.includes(searchVal);
@@ -42,6 +42,9 @@ const Restaurants = ({restaurants, searchVal, onStarClick, onSearch}) => {
                                 {restaurant.address}
                                 <br/>
                                 {restaurant.tel}
+                            </td>
+                            <td>
+                                {restaurant.score}
                             </td>
                         </tr>
                     ))}
