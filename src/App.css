@@ -3,3 +3,18 @@
     display: none;
   }
 }
+body {
+  direction: rtl;
+  margin: 25px;
+}
+
+table{
+  width: 100%;
+  border-spacing: 0px;
+}
+
+th, td {
+  border-bottom: 2px solid rgb(71, 188, 212);
+  padding: 10px 0px;
+}
+

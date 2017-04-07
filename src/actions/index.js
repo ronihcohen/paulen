@@ -1,10 +1,19 @@
 import {writeRating} from '../FirebaseController'
 
+function compare(a, b) {
+    a.paulenScore = a.paulenScore || 0;
+    b.paulenScore = b.paulenScore || 0;
+    if (a.paulenScore > b.paulenScore)
+        return -1;
+    if (a.paulenScore < b.paulenScore)
+        return 1;
+    return 0;
+}
 
 export const receiveRestaurants = (restaurants) => {
     return {
         type: 'RECEIVE_RESTAURANTS',
-        restaurants: restaurants
+        restaurants: restaurants.sort(compare)
     }
 };
 
