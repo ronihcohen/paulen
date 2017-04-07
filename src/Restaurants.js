@@ -41,7 +41,6 @@ const Restaurants = ({restaurants, searchVal, onStarClick, onSearch}) => {
                     <TableRow>
                         <TableHeaderColumn>Name</TableHeaderColumn>
                         <TableHeaderColumn>Paulen Score</TableHeaderColumn>
-                        <TableHeaderColumn className="optionalColumn">Critics Score</TableHeaderColumn>
                         <TableHeaderColumn className="optionalColumn">Details</TableHeaderColumn>
                     </TableRow>
                 </TableHeader>
@@ -57,7 +56,6 @@ const Restaurants = ({restaurants, searchVal, onStarClick, onSearch}) => {
                                     onStarClick={handleStarClick}
                                 />
                             </TableRowColumn>
-                            <TableRowColumn className="optionalColumn">{restaurant.score}</TableRowColumn>
                             <TableRowColumn className="optionalColumn">
                                 {restaurant.address}
                                 <br/>
