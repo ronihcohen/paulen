@@ -38,4 +38,10 @@ const login = () => {
     }
 };
 
+export const signOut = () => {
+    return dispatch => {
+        return Firebase.auth().signOut();
+    }
+};
+
 export default login

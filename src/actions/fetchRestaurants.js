@@ -28,7 +28,7 @@ const fetchRating = (restaurants, user) => {
     return Firebase.database().ref('/rating/' + user.uid).once('value')
         .then(snapshot => snapshot.val())
         .then(rating => restaurants.map((restaurant, index) => {
-            if (rating[index]) {
+            if (rating && rating[index]) {
                 return Object.assign(restaurant, rating[index]);
             }
             return restaurant

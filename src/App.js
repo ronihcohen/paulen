@@ -2,6 +2,7 @@ import {connect} from 'react-redux'
 import Restaurants from './Restaurants'
 import { onSearch } from './actions'
 import onStarClick from './actions/saveRating'
+import { signOut } from './actions/login'
 
 const mapStateToProps = (state) => {
     return {
@@ -18,6 +19,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         onSearch: (event, searchVal) => {
             dispatch(onSearch(searchVal))
+        },
+        signOut: () => {
+            dispatch(signOut())
         }
     }
 };

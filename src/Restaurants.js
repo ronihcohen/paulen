@@ -2,7 +2,7 @@ import React from 'react';
 import StarRatingComponent from 'react-star-rating-component';
 import TextField from 'material-ui/TextField';
 
-const Restaurants = ({restaurants, searchVal, user, onStarClick, onSearch}) => {
+const Restaurants = ({restaurants, searchVal, user, onStarClick, onSearch, signOut}) => {
 
     const fiteredRestaurants = restaurants.filter(restaurant => {
         return !searchVal || restaurant.name.includes(searchVal);
@@ -21,6 +21,18 @@ const Restaurants = ({restaurants, searchVal, user, onStarClick, onSearch}) => {
     };
 
     let count = 1;
+
+    const renderUser = user => {
+        if (user) {
+            return (
+                <div>
+                    <span>דורג ע״י </span>
+                    <span>{user.name} </span>
+                    <a href="" onClick={signOut}>(התנתקות) </a>
+                </div>
+            )
+        }
+    };
 
     return (
         <div>
@@ -53,6 +65,8 @@ const Restaurants = ({restaurants, searchVal, user, onStarClick, onSearch}) => {
                     ))}
                 </tbody>
             </table>
+            <br/>
+            {renderUser(user)}
         </div>
     );
 };
