@@ -1,4 +1,5 @@
 import Firebase from '../FirebaseController';
+import fetchRestaurants from './fetchRestaurants';
 
 
 const loginError = (errorMessage) => {
@@ -14,14 +15,8 @@ const tryToLogin = () => {
     }
 };
 
-export const userLoggedIn = (user) => {
-    return {
-        type: 'USER_LOGGED_IN',
-        user: user
-    };
-};
 
-export const login = () => {
+const login = () => {
     return dispatch => {
         dispatch(tryToLogin());
         const provider = new Firebase.auth.FacebookAuthProvider();
@@ -31,7 +26,10 @@ export const login = () => {
             .then(function (result) {
                 const user = result.user;
                 if (user) {
-                    dispatch(userLoggedIn(user.displayName));
+                    dispatch(fetchRestaurants({
+                        name: user.displayName,
+                        uid: user.uid
+                    }));
                 }
             }).catch(function (error) {
                 const errorMessage = error.message;
@@ -39,3 +37,5 @@ export const login = () => {
             });
     }
 };
+
+export default login

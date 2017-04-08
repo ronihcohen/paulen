@@ -14,7 +14,7 @@ const ratingSaved = () => {
 const onStarClick = (rating) => {
     return dispatch => {
         dispatch(requestSaveRating());
-        return Firebase.database().ref('/' + rating.id)
+        return Firebase.database().ref('/rating/' + rating.uid + '/' + rating.id)
             .update({
                 paulenScore: rating.score
             })

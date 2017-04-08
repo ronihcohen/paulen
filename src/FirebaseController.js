@@ -2,7 +2,7 @@ import Firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
 
-import {login, userLoggedIn} from './actions/login'
+import login from './actions/login'
 import fetchRestaurants from './actions/fetchRestaurants';
 
 const config = {
@@ -15,11 +15,12 @@ const config = {
 export const initFirebase = function (store) {
     Firebase.initializeApp(config);
 
-    store.dispatch(fetchRestaurants());
-
     Firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
-            store.dispatch(userLoggedIn(user.displayName));
+            store.dispatch(fetchRestaurants({
+                name: user.displayName,
+                uid: user.uid
+            }));
         } else {
             store.dispatch(login());
         }

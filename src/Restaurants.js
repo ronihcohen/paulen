@@ -15,7 +15,8 @@ const Restaurants = ({restaurants, searchVal, user, onStarClick, onSearch}) => {
         }
         onStarClick({
             id: id,
-            score: score
+            score: score,
+            uid: user.uid
         });
     };
 
