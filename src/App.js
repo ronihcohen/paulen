@@ -1,6 +1,7 @@
 import {connect} from 'react-redux'
 import Restaurants from './Restaurants'
-import { onStarClick, onSearch } from './actions'
+import { onSearch } from './actions'
+import onStarClick from './actions/saveRating'
 
 const mapStateToProps = (state) => {
     return {

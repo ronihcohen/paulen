@@ -1,5 +1,3 @@
-
-
 const restaurants = (state = {data: []}, action) => {
     switch (action.type) {
         case 'RECEIVE_RESTAURANTS':
@@ -9,10 +7,6 @@ const restaurants = (state = {data: []}, action) => {
         case 'FILTER_RESTAURANTS':
             return Object.assign({}, state, {
                 searchVal: action.searchVal
-            });
-        case 'USER_LOGGED_IN':
-            return Object.assign({}, state, {
-                user: action.user
             });
         default:
             return state
