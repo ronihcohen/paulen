@@ -19,6 +19,16 @@ th, td {
 }
 
 td.stars {
-  width: 100px;
+  width: 15%;
+  min-width: 100px;
+}
+
+a {
+  color: #47bcd4;
+  text-decoration: none;
+}
+
+a:hover{
+  color: #2f7785;
 }
 

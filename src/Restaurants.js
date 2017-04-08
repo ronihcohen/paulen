@@ -1,6 +1,8 @@
 import React from 'react';
 import StarRatingComponent from 'react-star-rating-component';
 import TextField from 'material-ui/TextField';
+import CircularProgress from 'material-ui/CircularProgress';
+
 
 const Restaurants = ({restaurants, searchVal, user, onStarClick, onSearch, signOut}) => {
 
@@ -28,13 +30,13 @@ const Restaurants = ({restaurants, searchVal, user, onStarClick, onSearch, signO
                 <div>
                     <span>דורג ע״י </span>
                     <span>{user.name} </span>
-                    <a href="" onClick={signOut}>(התנתקות) </a>
+                    (<a href="" onClick={signOut}>התנתקות</a>)
                 </div>
             )
         }
     };
 
-    return (
+    if (restaurants.length > 0) return (
         <div>
             <TextField
                 hintText="חיפוש"
@@ -69,6 +71,12 @@ const Restaurants = ({restaurants, searchVal, user, onStarClick, onSearch, signO
             {renderUser(user)}
         </div>
     );
+
+    return (
+        <div style={{textAlign: 'center'}}>
+            <CircularProgress size={80} thickness={5}/>
+        </div>
+    )
 };
 
 
