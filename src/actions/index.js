@@ -4,3 +4,11 @@ export const onSearch = (searchVal) => {
         searchVal: searchVal
     };
 };
+
+export const onSortBy = (columnName) => {
+    return {
+        type: 'SORT_RESTAURANTS',
+        columnName: columnName
+    };
+};
+

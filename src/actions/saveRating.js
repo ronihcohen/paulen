@@ -5,10 +5,11 @@ const requestSaveRating = () => {
         type: 'REQUEST_SAVE_RATING'
     }
 };
-const ratingSaved = () => {
-    return {
+
+const ratingSaved = (rating) => {
+    return Object.assign ({
         type: 'RATING_SAVED'
-    }
+    }, rating);
 };
 
 const onStarClick = (rating) => {
@@ -18,7 +19,7 @@ const onStarClick = (rating) => {
             .update({
                 paulenScore: rating.score
             })
-            .then(() => dispatch(ratingSaved()))
+            .then(() => dispatch(ratingSaved(rating)))
     }
 };
 

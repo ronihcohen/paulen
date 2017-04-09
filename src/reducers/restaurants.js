@@ -1,9 +1,11 @@
-const restaurants = (state = {data: []}, action) => {
+import { orderBy } from 'lodash';
+
+const restaurants = (state = {data: [], sorting: [false, false]}, action) => {
     switch (action.type) {
         case 'RECEIVE_RESTAURANTS':
             return {
                 ...state,
-                data: action.restaurants,
+                data: orderBy(action.restaurants, ({ paulenScore }) => paulenScore || '', ['desc']),
                 user: action.user
             };
         case 'FILTER_RESTAURANTS':
@@ -11,7 +13,21 @@ const restaurants = (state = {data: []}, action) => {
                 ...state,
                 searchVal: action.searchVal
             };
-
+        case 'SORT_RESTAURANTS':
+            return {
+                ...state,
+                sorting: action.columnName
+            };
+        case 'RATING_SAVED':
+            return {
+                ...state,
+                data: state.data.map(restaurant => {
+                    if (restaurant.id === parseInt(action.id, 10)){
+                        restaurant.paulenScore = action.score
+                    }
+                    return restaurant;
+                })
+            };
         default:
             return state
     }

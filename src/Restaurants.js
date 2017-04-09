@@ -2,19 +2,23 @@ import React from 'react';
 import StarRatingComponent from 'react-star-rating-component';
 import TextField from 'material-ui/TextField';
 import CircularProgress from 'material-ui/CircularProgress';
+import { orderBy } from 'lodash';
+import { TableHeader } from './table'
 
 
-const Restaurants = ({restaurants, searchVal, user, onStarClick, onSearch, signOut}) => {
+const Restaurants = ({restaurants, searchVal, user, sorting, onStarClick, onSearch, onSortBy, signOut}) => {
 
-    const fiteredRestaurants = restaurants.filter(restaurant => {
+    let fiteredRestaurants = restaurants.filter(restaurant => {
         return !searchVal || restaurant.name.includes(searchVal);
     });
 
+    if (sorting[0]) {
+        fiteredRestaurants = orderBy(fiteredRestaurants,
+            [( o ) => { return o[sorting[0]] || ''}], [sorting[1]?'asc':'desc']);
+    }
+
     const handleStarClick = function (nextValue, prevValue, id) {
         let score = nextValue;
-        if (nextValue === prevValue) {
-            score = 0;
-        }
         onStarClick({
             id: id,
             score: score,
@@ -27,14 +31,21 @@ const Restaurants = ({restaurants, searchVal, user, onStarClick, onSearch, signO
     const renderUser = user => {
         if (user) {
             return (
-                <div>
-                    <span>דורג ע״י </span>
-                    <span>{user.name} </span>
-                    (<a href="" onClick={signOut}>התנתקות</a>)
+                <div style={{
+                        textAlign: 'left',
+                        fontSize: '12px' }}>
+                    Connected as <a href="" onClick={signOut}>{user.name}</a>
                 </div>
             )
         }
     };
+
+    const tableHeaderList = [
+        ["name", "מסעדה"],
+        ["paulenScore", "הציון שלך"],
+        ["details", "פרטים"],
+        ["score", "ציון משוקלל"]
+    ];
 
     if (restaurants.length > 0) return (
         <div>
@@ -44,6 +55,18 @@ const Restaurants = ({restaurants, searchVal, user, onStarClick, onSearch, signO
                 onChange={onSearch}
             />
             <table>
+                <thead>
+                    <tr>
+                        {tableHeaderList.map((thData) =>
+                            <TableHeader columnName={thData[0]}
+                                         title={thData[1]}
+                                         sorting={sorting}
+                                         onSortBy={onSortBy}
+                                         key={thData[0]}>
+                            </TableHeader>
+                        )}
+                    </tr>
+                </thead>
                 <tbody>
                     {fiteredRestaurants.map((restaurant) => (
                         <tr key={restaurant.id}>

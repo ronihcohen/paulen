@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
 import Restaurants from './Restaurants'
-import { onSearch } from './actions'
+import { onSearch, onSortBy } from './actions'
 import onStarClick from './actions/saveRating'
 import { signOut } from './actions/login'
 
@@ -8,7 +8,8 @@ const mapStateToProps = (state) => {
     return {
         restaurants: state.restaurants.data,
         searchVal: state.restaurants.searchVal,
-        user: state.restaurants.user
+        user: state.restaurants.user,
+        sorting: state.restaurants.sorting
     }
 };
 
@@ -20,8 +21,12 @@ const mapDispatchToProps = (dispatch) => {
         onSearch: (event, searchVal) => {
             dispatch(onSearch(searchVal))
         },
-        signOut: () => {
+        signOut: (e) => {
+            e.preventDefault();
             dispatch(signOut())
+        },
+        onSortBy: (columnName) => {
+            dispatch(onSortBy(columnName))
         }
     }
 };

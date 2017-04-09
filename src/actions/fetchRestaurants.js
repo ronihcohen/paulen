@@ -1,15 +1,5 @@
 import Firebase from '../FirebaseController';
 
-const compare = (a, b) => {
-    a.paulenScore = a.paulenScore || 0;
-    b.paulenScore = b.paulenScore || 0;
-    if (a.paulenScore > b.paulenScore)
-        return -1;
-    if (a.paulenScore < b.paulenScore)
-        return 1;
-    return 0;
-};
-
 const requestRestaurants = () => {
     return {
         type: 'REQUEST_RESTAURANTS'
@@ -19,7 +9,7 @@ const requestRestaurants = () => {
 const receiveRestaurants = (restaurants, user) => {
     return {
         type: 'RECEIVE_RESTAURANTS',
-        restaurants: restaurants.sort(compare),
+        restaurants: restaurants,
         user: user
     }
 };

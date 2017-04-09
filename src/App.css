@@ -6,6 +6,7 @@
 body {
   direction: rtl;
   margin: 25px;
+  font-family: Roboto, sans-serif;
 }
 
 table{
@@ -30,5 +31,10 @@ a {
 
 a:hover{
   color: #2f7785;
+}
+th {
+  text-align: right;
+  padding-bottom: 17px;
+  cursor: pointer;
 }
 
