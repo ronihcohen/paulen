@@ -40,11 +40,36 @@ const Restaurants = ({restaurants, searchVal, user, sorting, onStarClick, onSear
         }
     };
 
+
+
+    const thProps = {
+        sorting: sorting,
+        onSortBy: onSortBy
+    };
+
     const tableHeaderList = [
-        ["name", "מסעדה"],
-        ["paulenScore", "הציון שלך"],
-        ["details", "פרטים"],
-        ["score", "ציון משוקלל"]
+        {
+            ...thProps,
+            columnName: "name",
+            title: "מסעדה"
+        },
+        {
+            ...thProps,
+            columnName: "paulenScore",
+            title: "הציון שלך"
+        },
+        {
+            ...thProps,
+            columnName: "address",
+            title: "פרטים",
+            optional: true
+        },
+        {
+            ...thProps,
+            columnName: "score",
+            title: "ציון משוקלל",
+            optional: true
+        }
     ];
 
     if (restaurants.length > 0) return (
@@ -58,11 +83,9 @@ const Restaurants = ({restaurants, searchVal, user, sorting, onStarClick, onSear
                 <thead>
                     <tr>
                         {tableHeaderList.map((thData) =>
-                            <TableHeader columnName={thData[0]}
-                                         title={thData[1]}
-                                         sorting={sorting}
-                                         onSortBy={onSortBy}
-                                         key={thData[0]}>
+                            <TableHeader {...thData}
+                                         key={thData.columnName}
+                                         >
                             </TableHeader>
                         )}
                     </tr>
