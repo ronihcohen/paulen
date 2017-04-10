@@ -4,6 +4,7 @@ import TextField from 'material-ui/TextField';
 import CircularProgress from 'material-ui/CircularProgress';
 import { orderBy } from 'lodash';
 import { TableHeader } from './table'
+import headers from './table/headers.json'
 
 
 const Restaurants = ({restaurants, searchVal, user, sorting, onStarClick, onSearch, onSortBy, signOut}) => {
@@ -40,37 +41,13 @@ const Restaurants = ({restaurants, searchVal, user, sorting, onStarClick, onSear
         }
     };
 
-
-
-    const thProps = {
-        sorting: sorting,
-        onSortBy: onSortBy
-    };
-
-    const tableHeaderList = [
-        {
-            ...thProps,
-            columnName: "name",
-            title: "מסעדה"
-        },
-        {
-            ...thProps,
-            columnName: "paulenScore",
-            title: "הציון שלך"
-        },
-        {
-            ...thProps,
-            columnName: "address",
-            title: "פרטים",
-            optional: true
-        },
-        {
-            ...thProps,
-            columnName: "score",
-            title: "ציון משוקלל",
-            optional: true
+    const tableHeaderList = headers.map(header => {
+        return {
+            ...header,
+            sorting: sorting,
+            onSortBy: onSortBy
         }
-    ];
+    });
 
     if (restaurants.length > 0) return (
         <div>

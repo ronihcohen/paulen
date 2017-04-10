@@ -9,7 +9,7 @@ export const TableHeader = ({ sorting, onSortBy, columnName, title, optional }) 
             {title}
             {sorting[0] === columnName?
             <span>
-                {sorting[1] ? ' ￪ ' : ' ￬ '}
+                {sorting[1] ? ' ￬ ' : ' ￪ ' }
             </span> : null }
         </th>
     )

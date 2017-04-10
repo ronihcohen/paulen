@@ -1,0 +1,20 @@
+[
+  {
+    "columnName": "name",
+    "title": "מסעדה"
+  },
+  {
+    "columnName": "paulenScore",
+    "title": "הציון שלך"
+  },
+  {
+    "columnName": "address",
+    "title": "פרטים",
+    "optional": true
+  },
+  {
+    "columnName": "score",
+    "title": "ציון משוקלל",
+    "optional": true
+  }
+]
