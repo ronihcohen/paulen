@@ -1,10 +1,10 @@
 import React from 'react';
-import StarRatingComponent from 'react-star-rating-component';
 import TextField from 'material-ui/TextField';
 import CircularProgress from 'material-ui/CircularProgress';
 import { orderBy } from 'lodash';
-import { TableHeader } from './table'
-import headers from './table/headers.json'
+import { TableHeader } from '../table'
+import headers from './headers.json'
+import Restaurant from './Restaurant'
 
 
 const Restaurants = ({restaurants, searchVal, user, sorting, onStarClick, onSearch, onSortBy, signOut}) => {
@@ -17,15 +17,6 @@ const Restaurants = ({restaurants, searchVal, user, sorting, onStarClick, onSear
         fiteredRestaurants = orderBy(fiteredRestaurants,
             [( o ) => { return o[sorting[0]] || ''}], [sorting[1]?'asc':'desc']);
     }
-
-    const handleStarClick = function (nextValue, prevValue, id) {
-        let score = nextValue;
-        onStarClick({
-            id: id,
-            score: score,
-            uid: user.uid
-        });
-    };
 
     let count = 1;
 
@@ -69,24 +60,12 @@ const Restaurants = ({restaurants, searchVal, user, sorting, onStarClick, onSear
                 </thead>
                 <tbody>
                     {fiteredRestaurants.map((restaurant) => (
-                        <tr key={restaurant.id}>
-                            <td>{count++}. {restaurant.name}</td>
-                            <td className="stars">
-                                <StarRatingComponent
-                                    name={"" + restaurant.id}
-                                    value={restaurant.paulenScore}
-                                    onStarClick={handleStarClick}
-                                />
-                            </td>
-                            <td className="optionalColumn">
-                                {restaurant.address}
-                                <br/>
-                                {restaurant.tel}
-                            </td>
-                            <td className="optionalColumn">
-                                {restaurant.score}
-                            </td>
-                        </tr>
+                        <Restaurant
+                            restaurant={restaurant}
+                            count = {count}
+                            onStarClick = {onStarClick}
+                            user = {user}
+                        ></Restaurant>
                     ))}
                 </tbody>
             </table>

@@ -1,5 +1,5 @@
 import {connect} from 'react-redux'
-import Restaurants from './Restaurants'
+import RestaurantsList from './Restaurants/RestaurantsList'
 import { onSearch, onSortBy } from './actions'
 import onStarClick from './actions/saveRating'
 import { signOut } from './actions/login'
@@ -35,7 +35,7 @@ const mapDispatchToProps = (dispatch) => {
 const App = connect(
     mapStateToProps,
     mapDispatchToProps
-)(Restaurants);
+)(RestaurantsList);
 
 
 export default App;

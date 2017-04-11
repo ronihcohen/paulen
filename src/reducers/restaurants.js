@@ -5,7 +5,9 @@ const restaurants = (state = {data: [], sorting: [false, false]}, action) => {
         case 'RECEIVE_RESTAURANTS':
             return {
                 ...state,
-                data: orderBy(action.restaurants, ({ paulenScore }) => paulenScore || '', ['desc']),
+                data: orderBy(action.restaurants,
+                    ({ paulenScore }) => paulenScore || '', ['desc']
+                ).filter(restaurant => restaurant.score > 0),
                 user: action.user
             };
         case 'FILTER_RESTAURANTS':
