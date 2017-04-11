@@ -40,3 +40,8 @@ th {
     cursor: pointer;
 }
 
+.authLine {
+    font-size: 12px;
+    text-align: left;
+}
+

@@ -3,6 +3,8 @@ import RestaurantsList from './Restaurants/RestaurantsList'
 import { onSearch, onSortBy } from './actions'
 import onStarClick from './actions/saveRating'
 import { signOut } from './actions/login'
+import login from './actions/login'
+
 
 const mapStateToProps = (state) => {
     return {
@@ -27,6 +29,14 @@ const mapDispatchToProps = (dispatch) => {
         },
         onSortBy: (columnName) => {
             dispatch(onSortBy(columnName))
+        },
+        loginWithGoogle: (e) => {
+            e.preventDefault();
+            dispatch(login('GOOGLE'))
+        },
+        loginWithFacebook: (e) => {
+            e.preventDefault();
+            dispatch(login('FACEBOOK'))
         }
     }
 };

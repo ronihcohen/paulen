@@ -1,6 +1,10 @@
 import Firebase from '../FirebaseController';
 import fetchRestaurants from './fetchRestaurants';
 
+const providers = {
+    'FACEBOOK': new Firebase.auth.FacebookAuthProvider(),
+    'GOOGLE': new Firebase.auth.GoogleAuthProvider()
+};
 
 const loginError = (errorMessage) => {
     return {
@@ -15,12 +19,10 @@ const tryToLogin = () => {
     }
 };
 
-
-const login = () => {
+const login = (provider) => {
     return dispatch => {
         dispatch(tryToLogin());
-        const provider = new Firebase.auth.FacebookAuthProvider();
-        Firebase.auth().signInWithRedirect(provider);
+        Firebase.auth().signInWithRedirect(providers[provider]);
 
         return Firebase.auth().getRedirectResult()
             .then(function (result) {

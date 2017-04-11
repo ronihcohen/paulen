@@ -19,13 +19,13 @@ const Restaurant = ({restaurant, count, onStarClick, user}) => {
                    target="_blank"
                    style={{color: "black"}}
                 > {restaurant.name} </a></td>
-            <td className="stars">
+            {user?<td className="stars">
                 <StarRatingComponent
                     name={"" + restaurant.id}
                     value={restaurant.paulenScore}
                     onStarClick={handleStarClick}
                 />
-            </td>
+            </td>:null}
             <td className="optionalColumn">
                 {restaurant.address}
                 <br/>

@@ -2,7 +2,6 @@ import Firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
 
-import login from './actions/login'
 import fetchRestaurants from './actions/fetchRestaurants';
 
 const config = {
@@ -21,8 +20,9 @@ export const initFirebase = function (store) {
                 name: user.displayName,
                 uid: user.uid
             }));
+
         } else {
-            store.dispatch(login());
+            store.dispatch(fetchRestaurants(null));
         }
     });
 };

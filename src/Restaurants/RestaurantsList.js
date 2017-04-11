@@ -7,7 +7,8 @@ import headers from './headers.json'
 import Restaurant from './Restaurant'
 
 
-const Restaurants = ({restaurants, searchVal, user, sorting, onStarClick, onSearch, onSortBy, signOut}) => {
+const Restaurants = ({restaurants, searchVal, user, sorting,
+    onStarClick, onSearch, onSortBy, signOut, loginWithGoogle, loginWithFacebook}) => {
 
     let fiteredRestaurants = restaurants.filter(restaurant => {
         return !searchVal || restaurant.name.includes(searchVal);
@@ -23,10 +24,17 @@ const Restaurants = ({restaurants, searchVal, user, sorting, onStarClick, onSear
     const renderUser = user => {
         if (user) {
             return (
-                <div style={{
-                        textAlign: 'left',
-                        fontSize: '12px' }}>
-                    Connected as <a href="" onClick={signOut}>{user.name}</a>
+                <div className="authLine">
+                     <a href="" onClick={signOut}>{user.name}</a>
+                </div>
+            )
+        } else {
+            return (
+                <div className="authLine">
+                    בכדי לדרג עלייך להתחבר בעזרת
+                    <a href="" onClick={loginWithGoogle}> גוגל </a>
+                     או
+                    <a href="" onClick={loginWithFacebook}> פייסבוק </a>
                 </div>
             )
         }
@@ -42,6 +50,7 @@ const Restaurants = ({restaurants, searchVal, user, sorting, onStarClick, onSear
 
     if (restaurants.length > 0) return (
         <div>
+            {renderUser(user)}
             <TextField
                 hintText="חיפוש"
                 fullWidth={true}
@@ -50,11 +59,13 @@ const Restaurants = ({restaurants, searchVal, user, sorting, onStarClick, onSear
             <table>
                 <thead>
                     <tr>
-                        {tableHeaderList.map((thData) =>
-                            <TableHeader {...thData}
-                                         key={thData.columnName}
-                                         >
-                            </TableHeader>
+                        {tableHeaderList.map((thData) => {
+                                return (!user && thData.columnName === 'paulenScore') ? null :
+                                    <TableHeader {...thData}
+                                                 key={thData.columnName}
+                                    >
+                                    </TableHeader>
+                            }
                         )}
                     </tr>
                 </thead>
@@ -71,11 +82,8 @@ const Restaurants = ({restaurants, searchVal, user, sorting, onStarClick, onSear
                         ]
                     }
                     )}
-
                 </tbody>
             </table>
-            <br/>
-            {renderUser(user)}
         </div>
     );
 

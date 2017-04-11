@@ -30,7 +30,7 @@ const fetchRestaurants = (user) => {
         dispatch(requestRestaurants());
         return Firebase.database().ref('/data').once('value')
             .then(snapshot => snapshot.val())
-            .then(restaurants => fetchRating(restaurants, user))
+            .then(restaurants => user? fetchRating(restaurants, user) : restaurants)
             .then(restaurants =>
                 dispatch(receiveRestaurants(restaurants, user)))
     }
