@@ -18,7 +18,7 @@ const Restaurants = ({restaurants, searchVal, user, sorting, onStarClick, onSear
             [( o ) => { return o[sorting[0]] || ''}], [sorting[1]?'asc':'desc']);
     }
 
-    let count = 1;
+    let count = 0;
 
     const renderUser = user => {
         if (user) {
@@ -59,14 +59,32 @@ const Restaurants = ({restaurants, searchVal, user, sorting, onStarClick, onSear
                     </tr>
                 </thead>
                 <tbody>
-                    {fiteredRestaurants.map((restaurant) => (
-                        <Restaurant
-                            restaurant={restaurant}
-                            count = {count}
-                            onStarClick = {onStarClick}
-                            user = {user}
-                        ></Restaurant>
-                    ))}
+                {fiteredRestaurants.map((restaurant) => {
+                        count++;
+                        return [
+                            <Restaurant
+                                restaurant={restaurant}
+                                count={count}
+                                onStarClick={onStarClick}
+                                user={user}
+                            ></Restaurant>,
+                            <tr>
+                                <td colSpan="4">
+                                    <div className={'notes ' +
+                                            (restaurant.paulenScore ? 'show' : '')}>
+                                        <TextField
+                                            hintText="הערות"
+                                            fullWidth={true}
+                                            multiLine={true}
+                                            underlineShow={false}
+                                        />
+                                    </div>
+                                </td>
+                            </tr>
+                        ]
+                    }
+                    )}
+
                 </tbody>
             </table>
             <br/>

@@ -14,7 +14,7 @@ const Restaurant = ({restaurant, count, onStarClick, user}) => {
 
     return (
         <tr key={restaurant.id}>
-            <td>{count++}. {restaurant.name}</td>
+            <td>{count}. {restaurant.name}</td>
             <td className="stars">
                 <StarRatingComponent
                     name={"" + restaurant.id}
@@ -32,6 +32,6 @@ const Restaurant = ({restaurant, count, onStarClick, user}) => {
             </td>
         </tr>
     )
-}
+};
 
 export default Restaurant

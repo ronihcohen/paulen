@@ -38,3 +38,13 @@ th {
   cursor: pointer;
 }
 
+div.notes {
+  max-height: 0px;
+  overflow: scroll;
+  transition: max-height 0.8s;
+}
+
+div.notes.show {
+  max-height: 200px;
+}
+
