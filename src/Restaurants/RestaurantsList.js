@@ -67,20 +67,7 @@ const Restaurants = ({restaurants, searchVal, user, sorting, onStarClick, onSear
                                 count={count}
                                 onStarClick={onStarClick}
                                 user={user}
-                            ></Restaurant>,
-                            <tr>
-                                <td colSpan="4">
-                                    <div className={'notes ' +
-                                            (restaurant.paulenScore ? 'show' : '')}>
-                                        <TextField
-                                            hintText="הערות"
-                                            fullWidth={true}
-                                            multiLine={true}
-                                            underlineShow={false}
-                                        />
-                                    </div>
-                                </td>
-                            </tr>
+                            ></Restaurant>
                         ]
                     }
                     )}

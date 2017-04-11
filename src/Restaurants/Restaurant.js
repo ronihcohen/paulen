@@ -13,8 +13,12 @@ const Restaurant = ({restaurant, count, onStarClick, user}) => {
     };
 
     return (
-        <tr key={restaurant.id}>
-            <td>{count}. {restaurant.name}</td>
+        <tr key={restaurant.id} className="restaurant">
+            <td>{count}.
+                <a href={"https://www.google.co.il/#q="+restaurant.name}
+                   target="_blank"
+                   style={{color: "black"}}
+                > {restaurant.name} </a></td>
             <td className="stars">
                 <StarRatingComponent
                     name={"" + restaurant.id}

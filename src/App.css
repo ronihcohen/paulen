@@ -1,50 +1,42 @@
 @media only screen and (max-width: 500px) {
-  .optionalColumn {
-    display: none;
-  }
-}
-body {
-  direction: rtl;
-  margin: 25px;
-  font-family: Roboto, sans-serif;
+    .optionalColumn {
+        display: none;
+    }
 }
 
-table{
-  width: 100%;
-  border-spacing: 0px;
+body {
+    direction: rtl;
+    margin: 25px;
+    font-family: Roboto, sans-serif;
+}
+
+table {
+    width: 100%;
+    border-spacing: 0px;
 }
 
 th, td {
-  border-bottom: 2px solid rgb(71, 188, 212);
-  padding: 10px 0px;
+    border-bottom: 2px solid rgb(71, 188, 212);
+    padding: 10px 0px;
 }
 
 td.stars {
-  width: 15%;
-  min-width: 100px;
+    width: 15%;
+    min-width: 100px;
 }
 
 a {
-  color: #47bcd4;
-  text-decoration: none;
+    color: #47bcd4;
+    text-decoration: none;
 }
 
-a:hover{
-  color: #2f7785;
+a:hover {
+    color: #2f7785;
 }
+
 th {
-  text-align: right;
-  padding-bottom: 17px;
-  cursor: pointer;
-}
-
-div.notes {
-  max-height: 0px;
-  overflow: scroll;
-  transition: max-height 0.8s;
-}
-
-div.notes.show {
-  max-height: 200px;
+    text-align: right;
+    padding-bottom: 17px;
+    cursor: pointer;
 }
 
