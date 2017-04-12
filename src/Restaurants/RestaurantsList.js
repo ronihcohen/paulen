@@ -31,10 +31,12 @@ const Restaurants = ({restaurants, searchVal, user, sorting,
         } else {
             return (
                 <div className="authLine">
-                    בכדי לדרג עלייך להתחבר בעזרת
-                    <a href="" onClick={loginWithGoogle}> גוגל </a>
-                     או
-                    <a href="" onClick={loginWithFacebook}> פייסבוק </a>
+                    בכדי לדרג עלייך להתחבר בעזרת &nbsp;
+                    <a href="" onClick={loginWithGoogle} className="vendorLink">
+                        <i className="fa fa-google fa-fw"></i> גוגל </a>
+                    &nbsp; או &nbsp;
+                    <a href="" onClick={loginWithFacebook} className="vendorLink">
+                        <i className="fa fa-facebook-official  fa-fw"></i>  פייסבוק </a>
                 </div>
             )
         }
@@ -84,6 +86,7 @@ const Restaurants = ({restaurants, searchVal, user, sorting,
                     )}
                 </tbody>
             </table>
+            {fiteredRestaurants.length > 0?'':<h4>לא נמצאו מסעדות</h4>}
         </div>
     );
 

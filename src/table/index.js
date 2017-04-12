@@ -9,7 +9,8 @@ export const TableHeader = ({ sorting, onSortBy, columnName, title, optional }) 
             {title}
             {sorting[0] === columnName?
             <span>
-                {sorting[1] ? ' ￬ ' : ' ￪ ' }
+                {sorting[1] ? <i className="fa fa-caret-down fa-fw"></i> :
+                              <i className="fa fa-caret-up fa-fw"></i> }
             </span> : null }
         </th>
     )

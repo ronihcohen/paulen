@@ -45,3 +45,8 @@ th {
     text-align: left;
 }
 
+.authLine .vendorLink {
+    font-size: 15px;
+    font-weight: bold;
+}
+
